@@ -18,7 +18,6 @@ import java.util.Map;
 @RequestMapping("/api/labor-attendance")
 public class LaborAttendanceController {
 
-
     @Autowired
     private LaborAttendanceService service;
 
