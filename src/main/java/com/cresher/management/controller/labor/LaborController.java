@@ -73,13 +73,13 @@ public class LaborController {
 
     // ✅ API to Get Payment History
     @GetMapping("/{laborId}/payment-history")
-    public ResponseEntity<List<LaborPayment>> getPaymentHistory(@PathVariable Long laborId) {
+    public ResponseEntity<List<LaborPayment>> getPaymentHistory(@PathVariable String laborId) {
         return ResponseEntity.ok(laborService.getPaymentHistory(laborId));
     }
 
     // ✅ API to Get Advance History
     @GetMapping("/{laborId}/advance-history")
-    public ResponseEntity<List<LaborAdvance>> getAdvanceHistory(@PathVariable Long laborId) {
+    public ResponseEntity<List<LaborAdvance>> getAdvanceHistory(@PathVariable String laborId) {
         return ResponseEntity.ok(laborService.getAdvanceHistory(laborId));
     }
 }

@@ -25,7 +25,7 @@ public class LaborAttendanceController {
     @PostMapping("/save")
     public ResponseEntity<LaborRecord> saveAttendance(@RequestBody LaborRecordDTO attendanceDTO) {
 
-        Labor labor = service.findLaborById(attendanceDTO.getLaborId())
+        Labor labor = service.findLaborById(String.valueOf(attendanceDTO.getLaborId()))
                 .orElseThrow(() -> new ResourceNotFoundException("Labor not found with ID: " + attendanceDTO.getLaborId()));
 
         // Create a new LaborRecord entity and set values
@@ -64,14 +64,14 @@ public class LaborAttendanceController {
     }
     // ✅ Update Attendance Record
     @PutMapping("/update/{id}")
-    public ResponseEntity<LaborRecord> updateAttendance(@PathVariable Long id, @RequestBody LaborRecord updatedAttendance) {
+    public ResponseEntity<LaborRecord> updateAttendance(@PathVariable String id, @RequestBody LaborRecord updatedAttendance) {
         LaborRecord updatedRecord = service.updateAttendance(id, updatedAttendance);
         return ResponseEntity.ok(updatedRecord);
     }
 
     // ✅ Delete Attendance Record
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteAttendance(@PathVariable Long id) {
+    public ResponseEntity<String> deleteAttendance(@PathVariable String id) {
         service.deleteAttendance(id);
         return ResponseEntity.ok("Attendance record with ID " + id + " has been deleted!");
     }
@@ -110,7 +110,7 @@ public class LaborAttendanceController {
     // ✅ Get Weekly Payment
     @GetMapping("/weekly-payment/{id}/{startDate}/{endDate}")
     public ResponseEntity<Map<String, Object>> getWeeklyPayment(
-            @PathVariable Long id, @PathVariable String startDate, @PathVariable String endDate) {
+            @PathVariable String id, @PathVariable String startDate, @PathVariable String endDate) {
         Map<String, Object> paymentData = service.getWeeklyPayment(id, LocalDate.parse(startDate), LocalDate.parse(endDate));
         return ResponseEntity.ok(paymentData);
     }

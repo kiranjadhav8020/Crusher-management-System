@@ -19,11 +19,12 @@ public class RawMaterialImportService {
     }
 
     public List<RawMaterialImport> getAllRawMaterialImports() {
+
         return repository.findAll();
     }
 
     public RawMaterialImport getRawMaterialImportById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Import record not found with ID: " + id));
+        return repository.findById(String.valueOf(id)).orElseThrow(() -> new RuntimeException("Import record not found with ID: " + id));
     }
 
     public RawMaterialImport updateRawMaterialImport(Long id, RawMaterialImport updatedRecord) {
@@ -37,7 +38,8 @@ public class RawMaterialImportService {
     }
 
     public void deleteRawMaterialImport(Long id) {
-        repository.deleteById(id);
+
+        repository.deleteById(String.valueOf(id));
     }
 
     public List<RawMaterialImport> getMonthlySummary(LocalDate startDate, LocalDate endDate) {

@@ -35,11 +35,11 @@ public class LaborService {
     }
 
     public Optional<Labor> getLaborById(Long id) {
-        return laborRepository.findById(id);
+        return laborRepository.findById(String.valueOf(id));
     }
 
     public Labor updateLabor(Long id, Labor updatedLabor) {
-        return laborRepository.findById(id).map(labor -> {
+        return laborRepository.findById(String.valueOf(id)).map(labor -> {
             labor.setLaborerName(updatedLabor.getLaborerName());
             labor.setPhoneNumber(updatedLabor.getPhoneNumber());
             labor.setJobRole(updatedLabor.getJobRole());
@@ -49,12 +49,12 @@ public class LaborService {
     }
 
     public void deleteLabor(Long id) {
-        laborRepository.deleteById(id);
+        laborRepository.deleteById(String.valueOf(id));
     }
 
     // ✅ 1. Add Advance
     public LaborAdvance addAdvance(Long laborId, Double advanceAmount) {
-        Labor labor = laborRepository.findById(laborId)
+        Labor labor = laborRepository.findById(String.valueOf(laborId))
                 .orElseThrow(() -> new RuntimeException("Labor not found"));
 
         LaborAdvance advance = new LaborAdvance();
@@ -73,7 +73,7 @@ public class LaborService {
 
     // ✅ 2. Make Payment and Deduct from Advance
     public LaborPayment makePayment(Long laborId, Double paymentAmount) {
-        Labor labor = laborRepository.findById(laborId)
+        Labor labor = laborRepository.findById(String.valueOf(laborId))
                 .orElseThrow(() -> new RuntimeException("Labor not found"));
 
         double deductedFromAdvance = 0.0;
@@ -102,12 +102,13 @@ public class LaborService {
     }
 
     // ✅ 3. Get Payment History
-    public List<LaborPayment> getPaymentHistory(Long laborId) {
+    public List<LaborPayment> getPaymentHistory(String laborId) {
         return laborPaymentRepository.findByLaborId(laborId);
     }
 
     // ✅ 4. Get Advance History
-    public List<LaborAdvance> getAdvanceHistory(Long laborId) {
+    public List<LaborAdvance> getAdvanceHistory(String laborId) {
+
         return laborAdvanceRepository.findByLaborId(laborId);
     }
 }

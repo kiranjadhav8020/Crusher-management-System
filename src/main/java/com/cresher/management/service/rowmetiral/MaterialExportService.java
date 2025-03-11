@@ -16,15 +16,17 @@ public class MaterialExportService {
     private MaterialExportRepository repository;
 
     public MaterialExport addMaterialExport(MaterialExport materialExport) {
+
         return repository.save(materialExport);
     }
 
     public List<MaterialExport> getAllMaterialExports() {
+
         return repository.findAll();
     }
 
     public MaterialExport getMaterialExportById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Export record not found with ID: " + id));
+        return repository.findById(String.valueOf(id)).orElseThrow(() -> new RuntimeException("Export record not found with ID: " + id));
     }
 
     public MaterialExport updateMaterialExport(Long id, MaterialExport updatedRecord) {
@@ -38,7 +40,8 @@ public class MaterialExportService {
     }
 
     public void deleteMaterialExport(Long id) {
-        repository.deleteById(id);
+
+        repository.deleteById(String.valueOf(id));
     }
 
     public List<MaterialExport> getMonthlySummary(LocalDate startDate, LocalDate endDate) {

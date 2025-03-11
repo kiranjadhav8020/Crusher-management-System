@@ -47,7 +47,7 @@ public class LaborAttendanceService {
         return repository.findByAttendanceDateBetween(startDate, endDate);
     }
 
-    public LaborRecord updateAttendance(Long id, LaborRecord updatedAttendance) {
+    public LaborRecord updateAttendance(String id, LaborRecord updatedAttendance) {
         return repository.findById(id).map(attendance -> {
             attendance.setLabor(updatedAttendance.getLabor());
             attendance.setAttendanceDate(updatedAttendance.getAttendanceDate());
@@ -58,7 +58,7 @@ public class LaborAttendanceService {
         }).orElseThrow(() -> new RuntimeException("Attendance record not found for ID: " + id));
     }
 
-    public void deleteAttendance(Long id) {
+    public void deleteAttendance(String id) {
         repository.deleteById(id);
     }
 
@@ -112,7 +112,7 @@ public class LaborAttendanceService {
 
     }
 
-    public Map<String, Object> getWeeklyPayment(Long laborerId, LocalDate startDate, LocalDate endDate) {
+    public Map<String, Object> getWeeklyPayment(String laborerId, LocalDate startDate, LocalDate endDate) {
 
         List<LaborRecord> records = repository.findRecordsByLaborAndDateRange(laborerId, startDate, endDate);
 
@@ -144,7 +144,7 @@ public class LaborAttendanceService {
        return response;
     }
 
-    public Optional<Labor> findLaborById(Long laborId) {
+    public Optional<Labor> findLaborById(String laborId) {
 
         return  laborRepository.findById(laborId);
     }

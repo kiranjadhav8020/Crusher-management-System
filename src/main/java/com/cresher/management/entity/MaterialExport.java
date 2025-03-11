@@ -1,36 +1,25 @@
 package com.cresher.management.entity;
 
-
-import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "material_exports")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Document(collection = "material_exports")
 public class MaterialExport {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(name = "export_date", nullable = false)
     private LocalDate exportDate;
-
-    @Column(name = "material_name", nullable = false)
     private String materialName;
-
-    @Column(name = "quantity_exported", nullable = false)
     private Double quantityExported;
-
-    @Column(name = "buyer_details", nullable = false)
     private String buyerDetails;
-
-    @Column(name = "price", nullable = false)
     private Double price;
 }

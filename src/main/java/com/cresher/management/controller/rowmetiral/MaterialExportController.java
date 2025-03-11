@@ -23,11 +23,13 @@ public class MaterialExportController {
 
     @GetMapping("/all")
     public List<MaterialExport> getAllMaterialExports() {
+
         return service.getAllMaterialExports();
     }
 
     @GetMapping("/{id}")
     public MaterialExport getMaterialExportById(@PathVariable Long id) {
+
         return service.getMaterialExportById(id);
     }
 

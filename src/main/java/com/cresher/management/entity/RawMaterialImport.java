@@ -1,35 +1,28 @@
 package com.cresher.management.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
-
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "raw_material_imports")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Document(collection = "raw_material_imports")  // Specify the collection name
 public class RawMaterialImport {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;  // MongoDB uses String for Id
 
-    @Column(name = "import_date", nullable = false)
     private LocalDate importDate;
 
-    @Column(name = "material_name", nullable = false)
     private String materialName;
 
-    @Column(name = "quantity_received", nullable = false)
     private Double quantityReceived;
 
-    @Column(name = "supplier_details", nullable = false)
     private String supplierDetails;
 
-    @Column(name = "price")
     private Double price;
 }

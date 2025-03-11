@@ -1,35 +1,28 @@
 package com.cresher.management.entity;
 
 import com.cresher.management.model.Labor;
-import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "labor_payment")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Document(collection = "labor_payment")
 public class LaborPayment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "labor_id", nullable = false)
+    @DBRef
     private Labor labor;
 
-    @Column(name = "payment_date", nullable = false)
     private LocalDate paymentDate;
-
-    @Column(name = "payment_amount", nullable = false)
     private Double paymentAmount;
-
-    @Column(name = "deducted_from_advance", nullable = false)
     private Double deductedFromAdvance;
 }
-

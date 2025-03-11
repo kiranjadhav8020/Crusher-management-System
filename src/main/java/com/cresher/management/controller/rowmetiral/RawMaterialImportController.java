@@ -23,6 +23,7 @@ public class RawMaterialImportController {
 
     @GetMapping("/all")
     public List<RawMaterialImport> getAllRawMaterialImports() {
+
         return service.getAllRawMaterialImports();
     }
 
